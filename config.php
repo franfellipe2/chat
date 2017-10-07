@@ -19,3 +19,8 @@ function __autoload($class) {
        echo "Não foi possível incluir a class $class.class.php";
    endif;
 }
+
+// ===================================================
+// ARQUIVOS NECESSÁRIOS
+// ===================================================
+require 'functions.php';

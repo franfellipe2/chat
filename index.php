@@ -1,9 +1,12 @@
 <?php
 require 'config.php';
-$conn = new sql();
-$conn->conect();
-?>
 
+$chat = new Chat();
+
+if (!empty($_POST)):
+    $lastId = $chat->save();
+endif;
+?>
 <html>
     <head>
         <title>Chat com PHP</title>
@@ -11,6 +14,11 @@ $conn->conect();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="style.css">
         <link href="https://fonts.googleapis.com/css?family=Mukta+Vaani|Roboto" rel="stylesheet">
+
+        <script type="text/javascript">
+            
+        </script>
+        
     </head>
     <body>
         <div id="content">
@@ -19,28 +27,51 @@ $conn->conect();
 
                 <div id="chat">
 
-                    <div id="chat-data">
+                    <?php
+                    $sql = new sql();
+                    $results = $sql->select('SELECT * FROM tb_chat ORDER BY id DESC');
 
-                        <span class="name">Francisco: </span>
-                        <span class="msg">Texto da mensagem Texto da mensagem Texto da mensagem Texto da mensagem Texto da mensagem </span>
-                        <span class="date">Data/Hora:</span>
-                        <div class="clear"></div>
+                    if (count($results) > 0):
 
-                    </div><!-- /#chat-data -->
+                        foreach ($results as $msg):
+                            ?>                    
+                            <div id = "chat-data">
+
+                                <span class = "name"><?php echo $msg['name']; ?> </span>
+                                <span class = "msg"><?php echo $msg['msg']; ?></span>
+                                <span class = "date"><?php echo formatDate($msg['date']); ?></span>
+                                <div class = "clear"></div>
+
+                            </div><!-- /#chat-data -->
+
+                            <?php
+                        endforeach;
+                    endif;
+                    ?>
 
                 </div><!-- /#chat -->
 
             </div><!-- /#chat-box -->
-
+            <?php
+            if ($chat->getError()):
+                echo '<div class="error">' . $chat->getError() . '</div>';
+            endif;
+            ?>
             <form method="post" action="index.php">
-                
+
                 <input type="text" name="name" placeholder="Nome">
-                <textarea placeholder="Inserir Mensagem" name="mensage"></textarea>
+                <textarea placeholder="Inserir Mensagem" name="msg"></textarea>
                 <input type="submit" value="Enviar" name="send">
 
             </form>
 
+            <?php
+            if (!empty($lastId)):
+                echo '<embed loop="false" src="beep.mp3" hidden="true" autoplay="true">';
+            endif;
+            ?>
+
         </div><!-- /#content -->
-        
+
     </body>
 </html>

@@ -69,3 +69,6 @@ HELPERS
 .clear{
     clear: both;
 }
+.error{
+    color: red;
+}
