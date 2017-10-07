@@ -1,3 +1,9 @@
+<?php
+require 'config.php';
+$conn = new sql();
+$conn->conect();
+?>
+
 <html>
     <head>
         <title>Chat com PHP</title>
@@ -15,9 +21,10 @@
 
                     <div id="chat-data">
 
-                        <span>Nome:</span>
-                        <span>Texto da mensagem</span>
-                        <span>Hora de envio</span>
+                        <span class="name">Francisco: </span>
+                        <span class="msg">Texto da mensagem Texto da mensagem Texto da mensagem Texto da mensagem Texto da mensagem </span>
+                        <span class="date">Data/Hora:</span>
+                        <div class="clear"></div>
 
                     </div><!-- /#chat-data -->
 

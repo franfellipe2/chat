@@ -41,9 +41,31 @@ input[type='submit']{
 }
 
 #chat-data{
+    line-height: 1.4em;
     width: 100%;
     padding: 5px;
     margin-bottom: 5px;
     border-bottom: 1px solid silver;
     font-family: 'Roboto', sans-serif;
+}
+
+#chat-data .name{   
+    color: #1c62c4;    
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+#chat-data .msg{    
+    color: #848484;
+}
+#chat-data .date{
+    color: #222;
+    float: right;
+    
+}
+
+/*
+HELPERS
+*/
+.clear{
+    clear: both;
 }

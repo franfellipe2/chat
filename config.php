@@ -1,8 +1,21 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// ===================================================
+// BANCO DE DADOS
+// ===================================================
+define('HOST_NAME', 'localhost');
+define('HOST_DBNAME', 'chat');
+define('HOST_USER', 'root');
+define('HOST_PASS', '');
 
+// ===================================================
+// AUTO LOAD
+// ===================================================
+function __autoload($class) {
+    
+   if(file_exists($class.'.class.php')):       
+       require_once $class.'.class.php';
+   else:
+       echo "Não foi possível incluir a class $class.class.php";
+   endif;
+}
