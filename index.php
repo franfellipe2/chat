@@ -1,11 +1,5 @@
 <?php
 require 'config.php';
-
-$chat = new Chat();
-
-if (!empty($_POST)):
-    $lastId = $chat->save();
-endif;
 ?>
 <html>
     <head>
@@ -13,51 +7,25 @@ endif;
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="style.css">
-        <link href="https://fonts.googleapis.com/css?family=Mukta+Vaani|Roboto" rel="stylesheet">
-
-        <script type="text/javascript">
-            
-        </script>
-        
+        <link href="https://fonts.googleapis.com/css?family=Mukta+Vaani|Roboto" rel="stylesheet">        
+        <script src="jquery.js" type="text/javascript"></script>
+        <script src="script.js" type="text/javascript"></script>
     </head>
+
     <body>
         <div id="content">
 
             <div id="chat-box">
 
                 <div id="chat">
-
-                    <?php
-                    $sql = new sql();
-                    $results = $sql->select('SELECT * FROM tb_chat ORDER BY id DESC');
-
-                    if (count($results) > 0):
-
-                        foreach ($results as $msg):
-                            ?>                    
-                            <div id = "chat-data">
-
-                                <span class = "name"><?php echo $msg['name']; ?> </span>
-                                <span class = "msg"><?php echo $msg['msg']; ?></span>
-                                <span class = "date"><?php echo formatDate($msg['date']); ?></span>
-                                <div class = "clear"></div>
-
-                            </div><!-- /#chat-data -->
-
-                            <?php
-                        endforeach;
-                    endif;
-                    ?>
-
+                    <!-- Local onde vai ser inserido o conteudo do chat -->
                 </div><!-- /#chat -->
 
             </div><!-- /#chat-box -->
-            <?php
-            if ($chat->getError()):
-                echo '<div class="error">' . $chat->getError() . '</div>';
-            endif;
-            ?>
-            <form method="post" action="index.php">
+
+            <div class="error"></div>
+
+            <form method="post" action="index.php" id="form">
 
                 <input type="text" name="name" placeholder="Nome">
                 <textarea placeholder="Inserir Mensagem" name="msg"></textarea>
@@ -65,11 +33,8 @@ endif;
 
             </form>
 
-            <?php
-            if (!empty($lastId)):
-                echo '<embed loop="false" src="beep.mp3" hidden="true" autoplay="true">';
-            endif;
-            ?>
+            <div class="audio_sucess"></div>
+
 
         </div><!-- /#content -->
 

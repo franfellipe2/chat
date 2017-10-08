@@ -36,8 +36,11 @@ input[type='submit']{
 }
 
 #chat-box{
-    width: 90%;
+    width: 95%;
     height: 470px;
+    padding-right: 5%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #chat-data{
